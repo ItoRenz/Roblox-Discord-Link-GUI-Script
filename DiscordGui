@@ -1,0 +1,256 @@
+-- Discord Link Display GUI (Mobile & PC Optimized)
+-- Manual copy support - No copy button
+-- Place in StarterGui > ScreenGui
+
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Configuration
+local DISCORD_LINK = "https://discord.gg/jRB3vn5gYF" -- Replace with your Discord link
+
+-- Platform Detection
+local isMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
+
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "DiscordLinkGui"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = playerGui
+
+-- Create Toggle Button with "DISCORD" Text (compact size)
+local toggleButton = Instance.new("TextButton")
+toggleButton.Name = "ToggleButton"
+if isMobile then
+	toggleButton.Size = UDim2.new(0, 70, 0, 30)
+	toggleButton.Position = UDim2.new(0.5, -55, 0, -43)
+else
+	toggleButton.Size = UDim2.new(0, 70, 0, 30)
+	toggleButton.Position = UDim2.new(0.5, -200, 0, -43)
+end
+toggleButton.AnchorPoint = Vector2.new(0.5, 0)
+toggleButton.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
+toggleButton.BorderSizePixel = 0
+toggleButton.Text = "DISCORD"
+toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+toggleButton.TextSize = isMobile and 11 or 12
+toggleButton.Font = Enum.Font.GothamBold
+toggleButton.ZIndex = 10
+toggleButton.Parent = screenGui
+
+-- Rounded corners for toggle button
+local toggleCorner = Instance.new("UICorner")
+toggleCorner.CornerRadius = UDim.new(0, 10)
+toggleCorner.Parent = toggleButton
+
+-- Add stroke for outline
+local toggleStroke = Instance.new("UIStroke")
+toggleStroke.Color = Color3.fromRGB(255, 255, 255)
+toggleStroke.Thickness = 2
+toggleStroke.Transparency = 0.8
+toggleStroke.Parent = toggleButton
+
+-- Create Frame Container with modern design (compact size, adjusted for no button)
+local frame = Instance.new("Frame")
+frame.Name = "Container"
+if isMobile then
+	frame.Size = UDim2.new(0, 160, 0, 60)
+	frame.Position = UDim2.new(0.5, -220, 0, -5)
+else
+	frame.Size = UDim2.new(0, 170, 0, 58)
+	frame.Position = UDim2.new(0.5, -220, 0, -5)
+end
+frame.AnchorPoint = Vector2.new(0.5, 0)
+frame.BackgroundColor3 = Color3.fromRGB(30, 33, 36)
+frame.BackgroundTransparency = 0.05
+frame.BorderSizePixel = 0
+frame.Visible = false
+frame.Parent = screenGui
+
+local frameCorner = Instance.new("UICorner")
+frameCorner.CornerRadius = UDim.new(0, 12)
+frameCorner.Parent = frame
+
+-- Add stroke for frame
+local frameStroke = Instance.new("UIStroke")
+frameStroke.Color = Color3.fromRGB(88, 101, 242)
+frameStroke.Thickness = 1.5
+frameStroke.Transparency = 0.5
+frameStroke.Parent = frame
+
+-- Create Title with icon
+local title = Instance.new("TextLabel")
+title.Name = "Title"
+title.Size = UDim2.new(1, -8, 0, 20)
+title.Position = UDim2.new(0, 4, 0, 3)
+title.BackgroundTransparency = 1
+title.Text = "Join Discord"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextSize = isMobile and 11 or 12
+title.Font = Enum.Font.GothamBold
+title.TextXAlignment = Enum.TextXAlignment.Center
+title.Parent = frame
+
+-- Create TextBox for Discord Link with modern design (selectable & editable for manual copy)
+local linkBox = Instance.new("TextBox")
+linkBox.Name = "LinkBox"
+if isMobile then
+	linkBox.Size = UDim2.new(0.9, 0, 0, 26)
+	linkBox.Position = UDim2.new(0.05, 0, 0, 28)
+else
+	linkBox.Size = UDim2.new(0.9, 0, 0, 25)
+	linkBox.Position = UDim2.new(0.05, 0, 0, 27)
+end
+linkBox.BackgroundColor3 = Color3.fromRGB(40, 43, 48)
+linkBox.BorderSizePixel = 0
+linkBox.Text = DISCORD_LINK
+linkBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+linkBox.TextSize = isMobile and 9 or 10
+linkBox.Font = Enum.Font.Gotham
+linkBox.ClearTextOnFocus = false
+linkBox.TextTruncate = Enum.TextTruncate.AtEnd
+linkBox.TextEditable = true
+linkBox.TextXAlignment = Enum.TextXAlignment.Center
+linkBox.Parent = frame
+
+local linkBoxCorner = Instance.new("UICorner")
+linkBoxCorner.CornerRadius = UDim.new(0, 6)
+linkBoxCorner.Parent = linkBox
+
+-- Stroke for linkbox
+local linkBoxStroke = Instance.new("UIStroke")
+linkBoxStroke.Color = Color3.fromRGB(88, 101, 242)
+linkBoxStroke.Thickness = 1
+linkBoxStroke.Transparency = 0.7
+linkBoxStroke.Parent = linkBox
+
+-- Toggle Function with smooth animation
+local tweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+local tweenInfoQuick = TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut)
+
+local function toggleFrame()
+	if frame.Visible then
+		-- Close with smooth animation
+		for _, child in pairs(frame:GetChildren()) do
+			if child:IsA("GuiObject") then
+				TweenService:Create(child, tweenInfoQuick, {
+					BackgroundTransparency = 1,
+					TextTransparency = 1
+				}):Play()
+			end
+		end
+		
+		local tweenClose = TweenService:Create(frame, tweenInfoQuick, {
+			BackgroundTransparency = 1
+		})
+		tweenClose:Play()
+		
+		wait(0.15)
+		frame.Visible = false
+	else
+		-- Open with smooth animation
+		frame.Visible = true
+		frame.BackgroundTransparency = 1
+		
+		-- Set all children transparent first
+		for _, child in pairs(frame:GetChildren()) do
+			if child:IsA("GuiObject") then
+				child.BackgroundTransparency = 1
+				if child:IsA("TextLabel") or child:IsA("TextButton") or child:IsA("TextBox") then
+					child.TextTransparency = 1
+				end
+			end
+		end
+		
+		-- Fade in frame background
+		local tweenOpen = TweenService:Create(frame, tweenInfo, {
+			BackgroundTransparency = 0.05
+		})
+		tweenOpen:Play()
+		
+		-- Fade in all elements with delay
+		task.wait(0.05)
+		
+		for _, child in pairs(frame:GetChildren()) do
+			if child:IsA("GuiObject") then
+				local transparency = (child.Name == "Title") and 1 or (child.Name == "LinkBox" and 0 or 0)
+				TweenService:Create(child, tweenInfo, {
+					BackgroundTransparency = transparency,
+					TextTransparency = 0
+				}):Play()
+			end
+		end
+	end
+end
+
+-- Auto-select text when clicking the textbox for easy manual copy
+linkBox.Focused:Connect(function()
+	linkBox.CursorPosition = #DISCORD_LINK + 1
+	linkBox.SelectionStart = 1
+	
+	-- Visual feedback when focused
+	TweenService:Create(linkBoxStroke, tweenInfoQuick, {
+		Transparency = 0.3,
+		Thickness = 2
+	}):Play()
+end)
+
+linkBox.FocusLost:Connect(function()
+	-- Reset text if user modified it
+	linkBox.Text = DISCORD_LINK
+	
+	-- Reset visual feedback
+	TweenService:Create(linkBoxStroke, tweenInfoQuick, {
+		Transparency = 0.7,
+		Thickness = 1
+	}):Play()
+end)
+
+-- Event Handlers
+toggleButton.MouseButton1Click:Connect(toggleFrame)
+
+-- Hover Effect for Toggle Button
+if not isMobile then
+	toggleButton.MouseEnter:Connect(function()
+		TweenService:Create(toggleButton, tweenInfoQuick, {
+			BackgroundColor3 = Color3.fromRGB(103, 118, 255),
+			Size = UDim2.new(0, 72, 0, 31),
+			TextColor3 = Color3.fromRGB(255, 255, 255)
+		}):Play()
+		TweenService:Create(toggleStroke, tweenInfoQuick, {
+			Transparency = 0.6
+		}):Play()
+	end)
+
+	toggleButton.MouseLeave:Connect(function()
+		TweenService:Create(toggleButton, tweenInfoQuick, {
+			BackgroundColor3 = Color3.fromRGB(88, 101, 242),
+			Size = UDim2.new(0, 70, 0, 30),
+			TextColor3 = Color3.fromRGB(255, 255, 255)
+		}):Play()
+		TweenService:Create(toggleStroke, tweenInfoQuick, {
+			Transparency = 0.8
+		}):Play()
+	end)
+	
+	-- Hover Effect for Link Box
+	linkBox.MouseEnter:Connect(function()
+		TweenService:Create(linkBox, tweenInfoQuick, {
+			BackgroundColor3 = Color3.fromRGB(45, 48, 53)
+		}):Play()
+	end)
+
+	linkBox.MouseLeave:Connect(function()
+		TweenService:Create(linkBox, tweenInfoQuick, {
+			BackgroundColor3 = Color3.fromRGB(40, 43, 48)
+		}):Play()
+	end)
+end
+
+print("✓ Discord Link GUI Loaded!")
+print("Platform: " .. (isMobile and "Mobile" or "PC"))
+print("Position: 220px left, Y = -43 | Compact design")
+print("Toggle: 70x30 | Panel: 170x58")
+print("Manual Copy: Click textbox to select all text ✓")
