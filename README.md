@@ -39,10 +39,12 @@ The script automatically detects the player's platform and adjusts:
 ### Method 1: Roblox Studio (Recommended)
 1. Open Roblox Studio
 2. Navigate to `StarterGui`
-3. Insert a new `LocalScript`
-4. Copy and paste the entire script
-5. Configure the Discord link (see Configuration section)
-6. Test in Play mode
+3. Add a new `ScreenGui`
+4. Change name `ScreenGui` to `Discord`
+5. Insert a new `LocalScript`
+6. Copy and paste the entire script
+7. Configure the Discord link (see Configuration section)
+8. Test in Play mode
 
 ### Method 2: Command Bar
 1. Open Command Bar in Studio (View > Command Bar)
