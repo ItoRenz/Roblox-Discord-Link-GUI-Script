@@ -24,11 +24,11 @@ screenGui.Parent = playerGui
 local toggleButton = Instance.new("TextButton")
 toggleButton.Name = "ToggleButton"
 if isMobile then
-	toggleButton.Size = UDim2.new(0, 70, 0, 30)
-	toggleButton.Position = UDim2.new(0.5, -55, 0, -43)
+	toggleButton.Size = UDim2.new(0, 65, 0, 25)
+	toggleButton.Position = UDim2.new(0.5, -55, 0, -46)
 else
 	toggleButton.Size = UDim2.new(0, 70, 0, 30)
-	toggleButton.Position = UDim2.new(0.5, -200, 0, -43)
+	toggleButton.Position = UDim2.new(0.5, -200, 0, -46)
 end
 toggleButton.AnchorPoint = Vector2.new(0.5, 0)
 toggleButton.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
