@@ -57,7 +57,7 @@ local frame = Instance.new("Frame")
 frame.Name = "Container"
 if isMobile then
 	frame.Size = UDim2.new(0, 160, 0, 60)
-	frame.Position = UDim2.new(0.5, -55, 0, -8) -- Below toggle button (-43 + 30 + 5 spacing)
+	frame.Position = UDim2.new(0.5, -55, 0, -16) -- Aligned with mobile toggle button
 else
 	frame.Size = UDim2.new(0, 170, 0, 58)
 	frame.Position = UDim2.new(0.5, -200, 0, -8) -- Below toggle button (-43 + 30 + 5 spacing)
@@ -253,11 +253,11 @@ print("✓ Discord Link GUI Loaded!")
 print("Platform: " .. (isMobile and "Mobile" or "PC"))
 if isMobile then
 	print("Mobile Layout:")
-	print("  - Toggle Button: Center top (Y=10)")
-	print("  - Panel: Below button (280x70)")
+	print("  - Toggle Button: Center top (Y=-46)")
+	print("  - Panel: Aligned with toggle button (160x60)")
 else
 	print("PC Layout:")
-	print("  - Toggle Button: Left aligned (X=-200, Y=10)")
-	print("  - Panel: Below button (320x75)")
+	print("  - Toggle Button: Left aligned (X=-200, Y=-46)")
+	print("  - Panel: Below button (170x58)")
 end
 print("Manual Copy: Click textbox to select all text ✓")
