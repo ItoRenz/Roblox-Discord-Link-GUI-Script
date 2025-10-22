@@ -28,7 +28,7 @@ if isMobile then
 	toggleButton.Position = UDim2.new(0.5, -55, 0, -46)
 else
 	toggleButton.Size = UDim2.new(0, 70, 0, 30)
-	toggleButton.Position = UDim2.new(0.5, -200, 0, -46)
+	toggleButton.Position = UDim2.new(0.5, -230, 0, -46)
 end
 toggleButton.AnchorPoint = Vector2.new(0.5, 0)
 toggleButton.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
@@ -57,10 +57,10 @@ local frame = Instance.new("Frame")
 frame.Name = "Container"
 if isMobile then
 	frame.Size = UDim2.new(0, 160, 0, 60)
-	frame.Position = UDim2.new(0.5, -55, 0, -16) -- Aligned with mobile toggle button
+	frame.Position = UDim2.new(0.5, -55, 0, -16)
 else
-	frame.Size = UDim2.new(0, 170, 0, 58)
-	frame.Position = UDim2.new(0.5, -200, 0, -8) -- Below toggle button (-43 + 30 + 5 spacing)
+	frame.Size = UDim2.new(0, 170, 0, 70)
+	frame.Position = UDim2.new(0.5, -230, 0, -11)
 end
 frame.AnchorPoint = Vector2.new(0.5, 0)
 frame.BackgroundColor3 = Color3.fromRGB(30, 33, 36)
@@ -257,7 +257,7 @@ if isMobile then
 	print("  - Panel: Aligned with toggle button (160x60)")
 else
 	print("PC Layout:")
-	print("  - Toggle Button: Left aligned (X=-200, Y=-46)")
-	print("  - Panel: Below button (170x58)")
+	print("  - Toggle Button: Position (0.5, -230, 0, -46)")
+	print("  - Panel: Below button (170x70) at Y=-11")
 end
 print("Manual Copy: Click textbox to select all text ✓")
