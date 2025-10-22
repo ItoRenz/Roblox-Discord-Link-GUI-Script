@@ -52,15 +52,15 @@ toggleStroke.Thickness = 2
 toggleStroke.Transparency = 0.8
 toggleStroke.Parent = toggleButton
 
--- Create Frame Container with modern design (compact size, adjusted for no button)
+-- Create Frame Container with modern design (positioned below toggle button)
 local frame = Instance.new("Frame")
 frame.Name = "Container"
 if isMobile then
 	frame.Size = UDim2.new(0, 160, 0, 60)
-	frame.Position = UDim2.new(0.5, -220, 0, -5)
+	frame.Position = UDim2.new(0.5, -55, 0, -8) -- Below toggle button (-43 + 30 + 5 spacing)
 else
 	frame.Size = UDim2.new(0, 170, 0, 58)
-	frame.Position = UDim2.new(0.5, -220, 0, -5)
+	frame.Position = UDim2.new(0.5, -200, 0, -8) -- Below toggle button (-43 + 30 + 5 spacing)
 end
 frame.AnchorPoint = Vector2.new(0.5, 0)
 frame.BackgroundColor3 = Color3.fromRGB(30, 33, 36)
@@ -107,7 +107,7 @@ linkBox.BackgroundColor3 = Color3.fromRGB(40, 43, 48)
 linkBox.BorderSizePixel = 0
 linkBox.Text = DISCORD_LINK
 linkBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-linkBox.TextSize = isMobile and 9 or 10
+linkBox.TextSize = isMobile and 11 or 12
 linkBox.Font = Enum.Font.Gotham
 linkBox.ClearTextOnFocus = false
 linkBox.TextTruncate = Enum.TextTruncate.AtEnd
@@ -116,7 +116,7 @@ linkBox.TextXAlignment = Enum.TextXAlignment.Center
 linkBox.Parent = frame
 
 local linkBoxCorner = Instance.new("UICorner")
-linkBoxCorner.CornerRadius = UDim.new(0, 6)
+linkBoxCorner.CornerRadius = UDim.new(0, 8)
 linkBoxCorner.Parent = linkBox
 
 -- Stroke for linkbox
@@ -216,7 +216,7 @@ if not isMobile then
 	toggleButton.MouseEnter:Connect(function()
 		TweenService:Create(toggleButton, tweenInfoQuick, {
 			BackgroundColor3 = Color3.fromRGB(103, 118, 255),
-			Size = UDim2.new(0, 72, 0, 31),
+			Size = UDim2.new(0, 74, 0, 32),
 			TextColor3 = Color3.fromRGB(255, 255, 255)
 		}):Play()
 		TweenService:Create(toggleStroke, tweenInfoQuick, {
@@ -251,6 +251,13 @@ end
 
 print("✓ Discord Link GUI Loaded!")
 print("Platform: " .. (isMobile and "Mobile" or "PC"))
-print("Position: 220px left, Y = -43 | Compact design")
-print("Toggle: 70x30 | Panel: 170x58")
+if isMobile then
+	print("Mobile Layout:")
+	print("  - Toggle Button: Center top (Y=10)")
+	print("  - Panel: Below button (280x70)")
+else
+	print("PC Layout:")
+	print("  - Toggle Button: Left aligned (X=-200, Y=10)")
+	print("  - Panel: Below button (320x75)")
+end
 print("Manual Copy: Click textbox to select all text ✓")
