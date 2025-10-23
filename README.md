@@ -1,151 +1,131 @@
-# Discord Link GUI for Roblox
+# Discord Link Display GUI for Roblox
 
 A modern, responsive Discord invite link display GUI for Roblox games with mobile and PC optimization.
 
-## ✨ Features
+## 🎨 Features
 
-- **Modern Discord-themed Design** - Sleek UI matching Discord's branding colors
-- **Cross-Platform Support** - Optimized layouts for both mobile and PC
-- **Smooth Animations** - Professional fade-in/fade-out effects with TweenService
-- **Manual Copy Support** - Auto-select text when clicking for easy copying
-- **Compact Design** - Minimal screen space usage
-- **Hover Effects** - Interactive feedback on PC (disabled on mobile for performance)
-- **Persistent GUI** - ResetOnSpawn disabled to maintain visibility
+- ✨ **Modern Design** - Clean, Discord-themed UI with smooth animations
+- 📱 **Mobile & PC Optimized** - Automatically detects platform and adjusts layout
+- 📋 **Manual Copy Support** - Click textbox to select all text for easy copying
+- 🎭 **Smooth Animations** - Professional fade-in/fade-out transitions
+- 🎯 **Hover Effects** - Interactive button and input effects (PC only)
+- 🔄 **Toggle Button** - Compact "DISCORD" button to show/hide the panel
 
-## 📱 Platform Detection
+## 📦 Installation
 
-The script automatically detects the player's platform and adjusts:
-- Button positioning
-- Text sizes
-- Frame dimensions
-- Hover effects (PC only)
-
-## 🎨 Design Specifications
-
-### Toggle Button
-- Size: 70×30 pixels
-- Position: Center-top, offset left 200px (PC) or 55px (Mobile)
-- Color: Discord Blurple (#5865F2)
-- Text: "DISCORD" in Gotham Bold
-
-### Main Panel
-- Size: 170×58 pixels (PC) / 160×60 pixels (Mobile)
-- Background: Dark Discord Gray (#1E2124)
-- Border: Discord Blurple with transparency
-- Rounded corners: 12px radius
-
-## 📥 Installation
-
-### Method 1: Roblox Studio (Recommended)
 1. Open Roblox Studio
-2. Navigate to `StarterGui`
-3. Add a new `ScreenGui`
-4. Change name `ScreenGui` to `Discord`
-5. Insert a new `LocalScript`
-6. Copy and paste the entire script
-7. Configure the Discord link (see Configuration section)
-8. Test in Play mode
-
-### Method 2: Command Bar
-1. Open Command Bar in Studio (View > Command Bar)
-2. Paste the script
-3. Press Enter
+2. Navigate to **StarterGui**
+3. Insert a **ScreenGui**
+4. Insert a **Script** or **LocalScript** into the ScreenGui
+5. Copy and paste the code into the script
+6. Modify the Discord link in the configuration section
 
 ## ⚙️ Configuration
 
-Edit the Discord link at the top of the script:
+Edit the `CONFIG` table at the top of the script:
 
 ```lua
-local DISCORD_LINK = "https://discord.gg/jRB3vn5gYF" -- Replace with your Discord link
+local CONFIG = {
+    DiscordLink = "https://discord.gg/jRB3vn5gYF", -- Replace with your Discord link
+    -- Colors and layout settings...
+}
 ```
 
-Replace `jRB3vn5gYF` with your Discord server's invite code.
+### Customizable Settings:
+- **Discord Link** - Your Discord server invite link
+- **Colors** - All UI colors (Discord theme, backgrounds, etc.)
+- **Mobile Layout** - Button size, position, and text size for mobile
+- **PC Layout** - Button size, position, and text size for PC
 
-## 🎯 Usage
+## 🎮 Usage
 
-### For Players
+### For Players:
 1. Click the **DISCORD** button at the top of the screen
-2. Panel opens with the Discord invite link
-3. Click the text box to auto-select the link
-4. Copy manually (Ctrl+C on PC, long-press on mobile)
-5. Paste into your browser or Discord app
+2. The Discord link panel will appear below the button
+3. Click the textbox to automatically select the entire link
+4. Manually copy the link using your device's copy function:
+   - **PC**: `Ctrl + C`
+   - **Mobile**: Long press and select "Copy"
 
-### For Developers
-- Place the script in `StarterGui > LocalScript`
-- Customize colors by editing `Color3.fromRGB()` values
-- Adjust positions using `UDim2` values
-- Modify animation speeds in `TweenInfo.new()`
+### Button Position:
+- **Mobile**: Centered at top (Y position: -46)
+- **PC**: Left-center position (X: 0.5, -230 | Y: -46)
 
-## 🔧 Customization Options
+## 📱 Platform Support
 
-### Colors
-```lua
--- Toggle Button
-BackgroundColor3 = Color3.fromRGB(88, 101, 242) -- Discord Blurple
+### Mobile
+- Touch-optimized button size (65x25)
+- Compact panel (160x60)
+- Smaller text (11px)
 
--- Frame
-BackgroundColor3 = Color3.fromRGB(30, 33, 36) -- Dark Gray
+### PC
+- Mouse hover effects
+- Slightly larger UI (70x30 button, 170x70 panel)
+- Standard text (12px)
 
--- Text Box
-BackgroundColor3 = Color3.fromRGB(40, 43, 48) -- Lighter Gray
+## 🎨 Visual Features
+
+- **Toggle Button**: Discord-colored button with white outline
+- **Panel**: Dark-themed container with Discord accent border
+- **Link Box**: Selectable textbox with focus effects
+- **Animations**: Smooth fade transitions for all elements
+
+## 🔧 Technical Details
+
+### Services Used:
+- `Players` - Get local player
+- `UserInputService` - Platform detection
+- `TweenService` - Smooth animations
+
+### Key Components:
+- **ScreenGui** - Main container
+- **TextButton** - Toggle button
+- **Frame** - Panel container
+- **TextBox** - Discord link input (editable for selection)
+
+## 📝 Code Structure
+
+```
+1. Services & Configuration
+2. Platform Detection
+3. UI Creation (Button, Frame, TextBox)
+4. Toggle Function with Animations
+5. Event Handlers (Click, Focus, Hover)
+6. Debug Output
 ```
 
-### Positioning
-```lua
--- Toggle Button Position (PC)
-toggleButton.Position = UDim2.new(0.5, -200, 0, -43)
+## 🛠️ Customization Tips
 
--- Toggle Button Position (Mobile)
-toggleButton.Position = UDim2.new(0.5, -55, 0, -43)
-```
+1. **Change Colors**: Edit the `Colors` table in `CONFIG`
+2. **Adjust Position**: Modify `Mobile` or `PC` position values
+3. **Resize Elements**: Change size values in `Mobile` or `PC` tables
+4. **Animation Speed**: Adjust `TweenInfo` values
 
-### Animation Timing
-```lua
--- Main animation (open/close)
-local tweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+## 📄 License
 
--- Quick animations (hover effects)
-local tweenInfoQuick = TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut)
-```
+Free to use and modify. Credit appreciated but not required.
 
-## 📋 Requirements
+## 👤 Author
 
-- Roblox Studio (latest version recommended)
-- LocalScript in StarterGui
-- FilteringEnabled compatible
-- No external modules required
+**ItoRenz00**
 
 ## 🐛 Known Issues
 
-- None reported
+- None currently reported
 
-## 🤝 Contributing
+## 📮 Support
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+For issues or questions, please join the Discord server or contact the author.
 
-## 📝 License
+## 🔄 Version History
 
-This project is open source and available for free use in your Roblox games.
-
-## 💡 Tips
-
-- Test on both mobile and PC devices
-- Ensure your Discord invite link is set to never expire
-- Consider adding the link to your game description as backup
-- Use a custom invite link for tracking purposes
-
-## 📞 Support
-
-If you encounter any issues or have questions:
-1. Check the console for error messages (F9 in-game)
-2. Verify the script is in the correct location
-3. Ensure your Discord link is valid
-4. Test in both Studio and published game
-
-## 🎓 Credits
-
-Created for the Roblox development community.
+### v1.0.0 (Current)
+- Initial release
+- Mobile and PC optimization
+- Manual copy support
+- Smooth animations
+- Modern Discord-themed design
 
 ---
 
-**Note:** This GUI does not automatically copy to clipboard due to Roblox security restrictions. Players must manually copy the link.
+**Made with ❤️ for the Roblox community**
