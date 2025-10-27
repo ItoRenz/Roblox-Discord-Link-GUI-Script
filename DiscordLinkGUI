@@ -2,7 +2,7 @@
 	Discord Link Display GUI
 	Author: ItoRenz00
 	Description: Mobile & PC optimized Discord link display with manual copy support
-	Place in: StarterGui > ScreenGui
+	Place in: StarterPlayer > StarterPlayerScripts
 --]]
 
 -- Services
@@ -45,14 +45,14 @@ local CONFIG = {
 local isMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
 local settings = isMobile and CONFIG.Mobile or CONFIG.PC
 
--- Tween Info
-local tweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-local tweenInfoQuick = TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut)
+-- Tween Info - Hanya untuk hover effects
+local tweenInfoQuick = TweenInfo.new(0.08, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut)
 
 -- Create ScreenGui
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "DiscordLinkGui"
 screenGui.ResetOnSpawn = false
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 screenGui.Parent = playerGui
 
 -- Create Toggle Button
@@ -144,51 +144,19 @@ linkBoxStroke.Parent = linkBox
 
 -- Functions
 local function toggleFrame()
+	-- INSTANT TOGGLE - NO ANIMATIONS!
+	frame.Visible = not frame.Visible
+	
 	if frame.Visible then
-		-- Close animation
-		for _, child in pairs(frame:GetChildren()) do
-			if child:IsA("GuiObject") then
-				TweenService:Create(child, tweenInfoQuick, {
-					BackgroundTransparency = 1,
-					TextTransparency = 1
-				}):Play()
-			end
-		end
-		
-		local tweenClose = TweenService:Create(frame, tweenInfoQuick, {
-			BackgroundTransparency = 1
-		})
-		tweenClose:Play()
-		
-		task.wait(0.15)
-		frame.Visible = false
-	else
-		-- Open animation
-		frame.Visible = true
-		frame.BackgroundTransparency = 1
-		
-		for _, child in pairs(frame:GetChildren()) do
-			if child:IsA("GuiObject") then
-				child.BackgroundTransparency = 1
-				if child:IsA("TextLabel") or child:IsA("TextButton") or child:IsA("TextBox") then
-					child.TextTransparency = 1
-				end
-			end
-		end
-		
-		TweenService:Create(frame, tweenInfo, {
-			BackgroundTransparency = 0.05
-		}):Play()
-		
-		task.wait(0.05)
-		
+		-- Reset semua transparency ke nilai normal
+		frame.BackgroundTransparency = 0.05
 		for _, child in pairs(frame:GetChildren()) do
 			if child:IsA("GuiObject") then
 				local transparency = (child.Name == "Title") and 1 or (child.Name == "LinkBox" and 0 or 0)
-				TweenService:Create(child, tweenInfo, {
-					BackgroundTransparency = transparency,
-					TextTransparency = 0
-				}):Play()
+				child.BackgroundTransparency = transparency
+				if child:IsA("TextLabel") or child:IsA("TextButton") or child:IsA("TextBox") then
+					child.TextTransparency = 0
+				end
 			end
 		end
 	end
@@ -252,7 +220,8 @@ if not isMobile then
 end
 
 -- Debug Output
-print("✓ Discord Link GUI Loaded!")
+print("✓ Discord Link GUI Loaded! [NO ANIMATION - INSTANT]")
 print("Author: ItoRenz00")
 print("Platform: " .. (isMobile and "Mobile" or "PC"))
 print("Manual Copy: Click textbox to select all text ✓")
+print("Toggle Speed: INSTANT - No lag!")
