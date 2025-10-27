@@ -1,131 +1,108 @@
-# Discord Link Display GUI for Roblox
+# Discord Link Display GUI
 
-A modern, responsive Discord invite link display GUI for Roblox games with mobile and PC optimization.
+A sleek and optimized Discord link display GUI for Roblox, supporting both Mobile and PC platforms with instant toggle and manual copy functionality.
 
-## 🎨 Features
+## ✨ Features
 
-- ✨ **Modern Design** - Clean, Discord-themed UI with smooth animations
-- 📱 **Mobile & PC Optimized** - Automatically detects platform and adjusts layout
-- 📋 **Manual Copy Support** - Click textbox to select all text for easy copying
-- 🎭 **Smooth Animations** - Professional fade-in/fade-out transitions
-- 🎯 **Hover Effects** - Interactive button and input effects (PC only)
-- 🔄 **Toggle Button** - Compact "DISCORD" button to show/hide the panel
+- 🎨 **Modern Discord-themed Design** - Clean UI with Discord's signature colors
+- 📱 **Cross-Platform Support** - Optimized layouts for both Mobile and PC
+- ⚡ **Instant Toggle** - Zero-lag panel opening/closing with no animations
+- 📋 **Manual Copy Support** - Easy text selection for copying Discord links
+- 🎯 **Smooth Hover Effects** - Enhanced UX with button hover animations (PC only)
+- 🔧 **Easy Configuration** - Simple setup with customizable Discord link
 
 ## 📦 Installation
 
-1. Open Roblox Studio
-2. Navigate to **StarterGui**
-3. Insert a **ScreenGui**
-4. Insert a **Script** or **LocalScript** into the ScreenGui
-5. Copy and paste the code into the script
-6. Modify the Discord link in the configuration section
+1. **Download** the `DiscordLinkGui.lua` script
+2. **Place** the script in `StarterPlayer > StarterPlayerScripts`
+3. **Configure** your Discord link in the CONFIG section
+4. **Test** in-game!
 
 ## ⚙️ Configuration
 
-Edit the `CONFIG` table at the top of the script:
+Edit the `CONFIG` table to customize your Discord link:
 
 ```lua
 local CONFIG = {
     DiscordLink = "https://discord.gg/jRB3vn5gYF", -- Replace with your Discord link
-    -- Colors and layout settings...
+    -- ... other settings
 }
 ```
-
-### Customizable Settings:
-- **Discord Link** - Your Discord server invite link
-- **Colors** - All UI colors (Discord theme, backgrounds, etc.)
-- **Mobile Layout** - Button size, position, and text size for mobile
-- **PC Layout** - Button size, position, and text size for PC
 
 ## 🎮 Usage
 
 ### For Players:
-1. Click the **DISCORD** button at the top of the screen
-2. The Discord link panel will appear below the button
-3. Click the textbox to automatically select the entire link
-4. Manually copy the link using your device's copy function:
-   - **PC**: `Ctrl + C`
-   - **Mobile**: Long press and select "Copy"
+1. Click the **DISCORD** button to open the panel
+2. Click the text box to select all text
+3. Copy the Discord link manually (Ctrl+C / Cmd+C)
+4. Click the button again to close the panel
 
-### Button Position:
-- **Mobile**: Centered at top (Y position: -46)
-- **PC**: Left-center position (X: 0.5, -230 | Y: -46)
+### Platform Detection:
+- **Mobile**: Smaller UI, touch-optimized
+- **PC**: Larger UI with hover effects
 
-## 📱 Platform Support
-
-### Mobile
-- Touch-optimized button size (65x25)
-- Compact panel (160x60)
-- Smaller text (11px)
-
-### PC
-- Mouse hover effects
-- Slightly larger UI (70x30 button, 170x70 panel)
-- Standard text (12px)
-
-## 🎨 Visual Features
-
-- **Toggle Button**: Discord-colored button with white outline
-- **Panel**: Dark-themed container with Discord accent border
-- **Link Box**: Selectable textbox with focus effects
-- **Animations**: Smooth fade transitions for all elements
-
-## 🔧 Technical Details
+## 🛠️ Technical Details
 
 ### Services Used:
-- `Players` - Get local player
+- `Players` - Player management
 - `UserInputService` - Platform detection
-- `TweenService` - Smooth animations
+- `TweenService` - Smooth hover animations
 
-### Key Components:
-- **ScreenGui** - Main container
-- **TextButton** - Toggle button
-- **Frame** - Panel container
-- **TextBox** - Discord link input (editable for selection)
+### Key Features:
+- **Instant Toggle**: No animation delays for optimal performance
+- **Auto Platform Detection**: Automatically adjusts UI for Mobile/PC
+- **Manual Copy**: Text selection support for easy copying
+- **Persistent GUI**: `ResetOnSpawn = false` keeps GUI on respawn
 
-## 📝 Code Structure
+## 📱 Platform Specifications
 
-```
-1. Services & Configuration
-2. Platform Detection
-3. UI Creation (Button, Frame, TextBox)
-4. Toggle Function with Animations
-5. Event Handlers (Click, Focus, Hover)
-6. Debug Output
-```
+### Mobile:
+- Toggle Button: 65x25 pixels
+- Panel Size: 160x60 pixels
+- Text Size: 11
+- Touch-optimized positioning
 
-## 🛠️ Customization Tips
+### PC:
+- Toggle Button: 70x30 pixels
+- Panel Size: 170x70 pixels
+- Text Size: 12
+- Hover effects enabled
 
-1. **Change Colors**: Edit the `Colors` table in `CONFIG`
-2. **Adjust Position**: Modify `Mobile` or `PC` position values
-3. **Resize Elements**: Change size values in `Mobile` or `PC` tables
-4. **Animation Speed**: Adjust `TweenInfo` values
+## 🎨 Color Scheme
+
+- **Discord Blue**: `#5865F2` (88, 101, 242)
+- **Discord Hover**: `#6776FF` (103, 118, 255)
+- **Dark Background**: `#1E2124` (30, 33, 36)
+- **Input Box**: `#282B30` (40, 43, 48)
+
+## 📋 Requirements
+
+- Roblox Studio
+- Basic knowledge of LocalScripts
+- A Discord server invite link
+
+## 🚀 Performance
+
+- **Zero Lag**: Instant panel toggle with no animations
+- **Lightweight**: Minimal resource usage
+- **Optimized**: Platform-specific configurations
 
 ## 📄 License
 
-Free to use and modify. Credit appreciated but not required.
+This project is open source and available for use in your Roblox games.
 
 ## 👤 Author
 
 **ItoRenz00**
 
-## 🐛 Known Issues
+## 🤝 Contributing
 
-- None currently reported
+Contributions, issues, and feature requests are welcome!
 
-## 📮 Support
+## ⭐ Support
 
-For issues or questions, please join the Discord server or contact the author.
-
-## 🔄 Version History
-
-### v1.0.0 (Current)
-- Initial release
-- Mobile and PC optimization
-- Manual copy support
-- Smooth animations
-- Modern Discord-themed design
+If you like this project, please give it a star on GitHub!
 
 ---
 
-**Made with ❤️ for the Roblox community**
+**Note**: Replace the Discord link in the CONFIG section with your own server invite link before using in your game.
